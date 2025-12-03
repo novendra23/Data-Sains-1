@@ -4,7 +4,12 @@ import pandas as pd
 import pickle
 
 # Load trained Random Forest model
-model = pickle.load(open("gradient_boosting_regressor_model.pkl", "rb"))
+try:
+    with open("gradient_boosting_regressor_model.pkl", "rb") as f:
+        model = pickle.load(f)
+except Exception as e:
+    st.error(f"Gagal memuat model: {e}")
+    st.stop()
 
 # Streamlit app title
 st.title("Aplikasi Prediksi Harga Penutupan Crypto")
